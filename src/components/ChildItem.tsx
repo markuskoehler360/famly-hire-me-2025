@@ -11,18 +11,18 @@ import {
   CImage,
 } from "@coreui/react";
 import { pickupTimeslots } from "../data/timeslots";
-import { Child } from "../types/child";
+import { IChild } from "../interfaces/child.interface";
 import { useState } from "react";
 import { useCheckinChild, useCheckoutChild } from "../hooks/useChildren";
 import {
-  convertDateToReadibleString,
+  convertDateToReadableString,
   filterTimeslots,
 } from "../utils/dateUtils";
 
 const DEFAULT_PICKUP_TIME = "16:00";
 
 interface ChildItemProps {
-  child: Child;
+  child: IChild;
 }
 
 export default function ChildItem({ child }: ChildItemProps) {
@@ -57,7 +57,7 @@ export default function ChildItem({ child }: ChildItemProps) {
         />
         <CCardText>
           {child.checkedIn
-            ? `Checked in since ${convertDateToReadibleString(
+            ? `Checked in since ${convertDateToReadableString(
                 child.checkinTime
               )}`
             : "Not checked in"}
@@ -70,7 +70,7 @@ export default function ChildItem({ child }: ChildItemProps) {
             Check Out
           </CButton>
         ) : (
-          <div>
+          <>
             <CButton color="primary" onClick={handleCheckIn} className="me-2">
               Check in
             </CButton>
@@ -92,7 +92,7 @@ export default function ChildItem({ child }: ChildItemProps) {
                 })}
               </CDropdownMenu>
             </CDropdown>
-          </div>
+          </>
         )}
       </CCardBody>
     </CCard>

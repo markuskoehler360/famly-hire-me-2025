@@ -3,17 +3,10 @@ import { debounce } from "../utils/debounce";
 
 export const useInfiniteScroll = <T>(
   data: T[] | undefined,
-  initialCount = 20,
-  step = 20
+  initialCount = 10,
+  step = 10
 ) => {
-  const [visibleItems, setVisibleItems] = useState<T[]>([]);
   const [currentIndex, setCurrentIndex] = useState(initialCount);
-
-  useEffect(() => {
-    if (data) {
-      setVisibleItems(data.slice(0, currentIndex));
-    }
-  }, [data, currentIndex]);
 
   const handleScroll = debounce(() => {
     if (
@@ -29,5 +22,6 @@ export const useInfiniteScroll = <T>(
     return () => window.removeEventListener("scroll", handleScroll);
   }, [currentIndex, data, handleScroll]);
 
+  const visibleItems = data?.slice(0, currentIndex);
   return { visibleItems };
 };

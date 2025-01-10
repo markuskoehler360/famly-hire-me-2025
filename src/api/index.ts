@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Child } from "../types/child";
+import { IChild } from "../interfaces/child.interface";
 
 const accessToken = import.meta.env.VITE_ACCESS_TOKEN;
 const groupId = import.meta.env.VITE_GROUP_ID;
@@ -12,7 +12,9 @@ const params = new URLSearchParams({
   institutionId,
 });
 
-export const fetchChildren = async (): Promise<Child[]> => {
+const jsonHeaders = { "Content-Type": "application/json; charset=UTF-8" };
+
+export const fetchChildren = async (): Promise<IChild[]> => {
   const response = await axios.get(daycareGroupApiUrl, {
     params,
   });
@@ -28,9 +30,7 @@ export const checkinChild = async (childId: string, pickupTime: string) => {
       accessToken,
     },
     {
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-      },
+      headers: jsonHeaders,
     }
   );
 
@@ -44,9 +44,7 @@ export const checkoutChild = async (childId: string) => {
       accessToken,
     },
     {
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-      },
+      headers: jsonHeaders,
     }
   );
 

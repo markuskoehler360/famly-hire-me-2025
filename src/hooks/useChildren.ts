@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { checkinChild, checkoutChild, fetchChildren } from "../api";
-import { CheckinResponse, Child } from "../types/child";
+import { ICheckinResponse } from "../interfaces/checkinResponse.interface";
+import { IChild } from "../interfaces/child.interface";
 
 export const useChildren = () => {
   return useQuery({
@@ -18,8 +19,8 @@ export const useCheckinChild = () => {
     onError: () => {
       alert("You chose an invalid pickup time. Please try again.");
     },
-    onSuccess: (data: CheckinResponse) => {
-      queryClient.setQueryData(["children"], (oldData: Child[]) => {
+    onSuccess: (data: ICheckinResponse) => {
+      queryClient.setQueryData(["children"], (oldData: IChild[]) => {
         return oldData.map((child) =>
           child.childId === data.childId
             ? {
@@ -40,8 +41,8 @@ export const useCheckoutChild = () => {
   return useMutation({
     mutationFn: (variables: { childId: string }) =>
       checkoutChild(variables.childId),
-    onSuccess: (data: Child[]) => {
-      queryClient.setQueryData(["children"], (oldData: Child[]) => {
+    onSuccess: (data: IChild[]) => {
+      queryClient.setQueryData(["children"], (oldData: IChild[]) => {
         return oldData.map((child) =>
           child.childId === data[0].childId
             ? {

@@ -1,10 +1,5 @@
-export const convertDateToReadibleString = (date: Date): string => {
-  return new Date(date)
-    .toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    })
-    .slice(0, 5);
+export const convertDateToReadableString = (date: string): string => {
+  return `${new Date(date).getHours()}:${new Date().getMinutes()}`;
 };
 
 export const filterTimeslots = (timeslots: string[]): string[] => {

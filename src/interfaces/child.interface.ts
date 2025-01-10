@@ -1,0 +1,40 @@
+import { ICheckin } from "./checkin.interface";
+import { IImage } from "./image.interface";
+import {IName } from "./name.interface";
+
+export interface IChild {
+  childId: string;
+  institutionId: string;
+  groupId: string;
+  createdTime: string;
+  name: IName;
+  birthday: string;
+  homeAddress: null;
+  extraInfo: string;
+  language: string;
+  nationality: string;
+  birthplace: string;
+  gender: number;
+  startDate: string;
+  endDate: null;
+  leavingReason: null;
+  isTestChild: boolean;
+  relations: null;
+  image: IImage;
+  isSleeping: boolean;
+  naps: unknown[];
+  hasVacation: boolean;
+  isSick: boolean;
+  isAbsent: boolean;
+  leaves: unknown[];
+  onBus: boolean;
+  onTrip: boolean;
+  statuses: unknown[];
+  statusRegistrations: unknown[];
+  checkins: ICheckin[];
+  checkedIn: boolean;
+  checkinTime: string;
+  pickupTime: null;
+  pickupRelationId: string;
+  pickupName: string;
+}

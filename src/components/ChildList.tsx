@@ -1,12 +1,12 @@
 import { CSpinner } from "@coreui/react";
 import ChildItem from "./ChildItem";
-import { Child } from "../types/child";
+import { IChild } from "../interfaces/child.interface";
 import { useChildren } from "../hooks/useChildren";
 import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 
 export default function ChildList() {
   const { isLoading, error, data } = useChildren();
-  const { visibleItems } = useInfiniteScroll<Child>(data);
+  const { visibleItems } = useInfiniteScroll<IChild>(data);
 
   if (isLoading) return <CSpinner />;
   if (error) return "An error has occurred: " + error.message;
@@ -14,7 +14,7 @@ export default function ChildList() {
   return (
     <div>
       <ul>
-        {visibleItems?.map((child: Child, index) => (
+        {visibleItems?.map((child: IChild, index) => (
           <ChildItem key={index} child={child} />
         ))}
       </ul>
